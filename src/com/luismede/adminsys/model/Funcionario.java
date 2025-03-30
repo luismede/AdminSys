@@ -1,20 +1,30 @@
 package com.luismede.adminsys.model;
 
+import java.sql.Date;
+
 public class Funcionario {
+    private int id;
     private String nome;
+    private String telefone;
+    private String email;
+    private Date data_contratacao;
+    private double salario;
     private String cargo;
     private String cpf;
-    private double salario;
-    private int dept_id;
+    private Departamento departamento;
 
-    public Funcionario() {}
+    public Funcionario() {
+    }
 
-    public Funcionario(String nome, String cargo, String cpf, double salario, int dept_id) {
+    public Funcionario(String nome, String telefone, String email, Date data_contratacao, double salario, String cargo, String cpf, Departamento departamento) {
         this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.data_contratacao = data_contratacao;
+        this.salario = salario;
         this.cargo = cargo;
         this.cpf = cpf;
-        this.salario = salario;
-        this.dept_id = dept_id;
+        this.departamento = departamento;
     }
 
     public String getNome() {
@@ -23,6 +33,30 @@ public class Funcionario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getData_contratacao() {
+        return data_contratacao;
+    }
+
+    public void setData_contratacao(Date data_contratacao) {
+        this.data_contratacao = data_contratacao;
     }
 
     public String getCargo() {
@@ -41,22 +75,34 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
     public double getSalario() {
         return salario;
     }
 
-
-    public int getDept_id() {
-        return dept_id;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
-    public void setDept_id(int dept_id) {
-        this.dept_id = dept_id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     @Override
     public String toString() {
-        return "Nome: " + this.nome + ", Cargo: " + this.cargo + ", CPF: " +
-                this.cpf + ", Salario: " + this.salario + ", Departamento: "  + this.dept_id;
+        return "ID: " + this.id + " ,Nome: " + this.nome + ", Cargo: " + this.cargo + ", CPF: " +
+                this.cpf + ", Salario: " + this.salario + ", Departamento: " + this.departamento;
     }
 }

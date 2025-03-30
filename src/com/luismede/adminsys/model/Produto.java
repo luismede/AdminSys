@@ -60,4 +60,10 @@ public class Produto {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    @Override
+    public String toString() {
+        return "Nome: " + this.descricao + ", Código  de Barras: " + this.codigo_barras + ", Preço de custo: " +
+                this.preco_custo + ", Preço de Venda: " + this.preco_venda + ", Categoria: " + this.categoria;
+    }
 }

@@ -12,7 +12,7 @@ public class ConnectionDB {
 
     protected Connection connection;
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         try {
             // Driver que srá utilizado pelo Driver Manager
             Class.forName("org.postgresql.Driver");
