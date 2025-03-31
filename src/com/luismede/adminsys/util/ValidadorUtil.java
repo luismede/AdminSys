@@ -49,18 +49,22 @@ public class ValidadorUtil {
     }
 
 
+    // Verifica se o status é válido (0 ou 1)
     public static boolean isStatusValido(int status) {
-
-        return status == INATIVO || status == ATIVO;
+        return status == ATIVO || status == INATIVO;
     }
 
+    // Verifica se o status está ativo (1)
     public static boolean isAtivo(int status) {
         if (!isStatusValido(status)) {
-            throw new IllegalArgumentException("Status inválido. Use 0 (inativo) ou 1 (ativo)");
+            throw new IllegalArgumentException("Status inválido. Use " + INATIVO + " (inativo) ou " + ATIVO + " (ativo)");
         }
-        return status == 1;
+        return status == ATIVO;
     }
 
+    public static boolean estaAtivo(int status) {
+        return isStatusValido(status) && status == ATIVO;
+    }
     public boolean isTipoValido(String tipo) {
         return tipo == ENTRADA || tipo == SAIDA;
     }

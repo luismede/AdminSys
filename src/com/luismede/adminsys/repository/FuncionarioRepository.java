@@ -5,7 +5,7 @@ import com.luismede.adminsys.model.Funcionario;
 import java.sql.*;
 
 public class FuncionarioRepository {
-    public void addFuncionario(Funcionario funcionario) {
+    public void criarFuncionario(Funcionario funcionario) {
         String sql = "INSERT INTO funcionario (nome, telefone, email, data_contratacao, salario, cargo, cpf, dept_id) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
