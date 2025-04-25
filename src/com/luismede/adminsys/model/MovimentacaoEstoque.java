@@ -71,13 +71,20 @@ public class MovimentacaoEstoque {
 
     @Override
     public String toString() {
-        return "MovimentacaoEstoque {" +
-                "Quantidade: " + this.quantidade +
-                ", Tipo: '" + this.tipo + '\'' +
-                ", Data Movimentacao:" + this.data_movimentacao +
-                ", Motivo: '" + this.motivo + '\'' +
-                ", Produto: " + this.produto +
-                ", Funcionario: " + this.funcionario +
-                '}';
+        return String.format("""
+        Movimentação de Estoque [
+            Quantidade: %d
+            Tipo: %s
+            Data da Movimentação: %s
+            Motivo: %s
+            Produto: %s
+            Funcionário: %s
+        ]
+        """, quantidade, tipo,
+                data_movimentacao != null ? data_movimentacao.toString() : "Não informada",
+                motivo != null ? motivo : "Não informado",
+                produto != null ? produto.getNome() : "Não vinculado",
+                funcionario != null ? funcionario.getNome() : "Não vinculado");
     }
+
 }

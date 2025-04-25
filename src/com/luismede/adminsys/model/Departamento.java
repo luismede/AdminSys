@@ -3,24 +3,25 @@ package com.luismede.adminsys.model;
 import java.sql.Date;
 
 public class Departamento {
-    private int id;
+    private long id;
     private String nome;
     private String descricao;
     private double orcamento;
     private Date data_criacao;
     private int ativo;
 
-    public Departamento() {
-    }
+    public Departamento() {}
 
-    public Departamento(String nome, String descricao, double orcamento, Date data_criacao) {
+    public Departamento(int id, String nome, String descricao, double orcamento, Date data_criacao, int ativo) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.orcamento = orcamento;
         this.data_criacao = data_criacao;
+        this.ativo = ativo;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -72,8 +73,19 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "ID: " + this.id + ", Nome: " + this.nome + ", Descrição: " + this.descricao + ", Orçamento: " +
-                this.orcamento + ", Data de Criação: " + this.data_criacao + ", Ativo: " + this.ativo;
+        return String.format("""
+        Departamento [
+            ID: %d
+            Nome: %s
+            Descrição: %s
+            Orçamento: R$ %,.2f
+            Data de Criação: %s
+            Status: %s
+        ]
+        """, id, nome, descricao, orcamento,
+                data_criacao != null ? data_criacao.toString() : "Não informada",
+                ativo == 1 ? "Ativo" : "Inativo");
     }
+
 
 }

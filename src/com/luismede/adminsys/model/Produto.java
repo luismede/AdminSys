@@ -1,6 +1,7 @@
 package com.luismede.adminsys.model;
 
 public class Produto {
+    private long id;
     private String nome;
     private String descricao;
     private String codigo_barras;
@@ -8,19 +9,40 @@ public class Produto {
     private double preco_venda;
     private String categoria;
 
-    public Produto() {}
+    public Produto() {
+    }
 
     public Produto(String codigo_barras) {
         this.codigo_barras = codigo_barras;
     }
 
-    public Produto(String nome, String descricao, String codigo_barras, double preco_custo, double preco_venda, String categoria) {
+    public Produto(long id, String nome, String descricao, String codigo_barras, double preco_custo, double preco_venda, String categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.codigo_barras = codigo_barras;
         this.preco_custo = preco_custo;
         this.preco_venda = preco_venda;
         this.categoria = categoria;
+    }
+
+    public void setCodigo_barras(String codigo_barras) {
+        this.codigo_barras = codigo_barras;
+    }
+
+    public void setPreco_custo(double preco_custo) {
+        this.preco_custo = preco_custo;
+    }
+
+    public void setPreco_venda(double preco_venda) {
+        this.preco_venda = preco_venda;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getNome() {
@@ -63,7 +85,23 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Nome: " + this.descricao + ", Código  de Barras: " + this.codigo_barras + ", Preço de custo: " +
-                this.preco_custo + ", Preço de Venda: " + this.preco_venda + ", Categoria: " + this.categoria;
+        return String.format("""
+                        Produto [
+                            Nome: %s
+                            Descrição: %s
+                            Código de Barras: %s
+                            Preço de Custo: R$ %.2f
+                            Preço de Venda: R$ %.2f
+                            Categoria: %s
+                        ]
+                        """,
+                this.nome != null ? this.nome : "Não informado",
+                this.descricao != null ? this.descricao : "Não informada",
+                this.codigo_barras != null ? this.codigo_barras : "Não informado",
+                this.preco_custo,
+                this.preco_venda,
+                this.categoria != null ? this.categoria : "Não informada"
+        );
     }
+
 }

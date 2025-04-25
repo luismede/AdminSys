@@ -3,7 +3,7 @@ package com.luismede.adminsys.model;
 import java.sql.Date;
 
 public class Funcionario {
-    private int id;
+    private long id;
     private String nome;
     private String telefone;
     private String email;
@@ -11,6 +11,7 @@ public class Funcionario {
     private double salario;
     private String cargo;
     private String cpf;
+    private String nomeDepartamento;
     private Departamento departamento;
 
     public Funcionario() {
@@ -87,6 +88,14 @@ public class Funcionario {
         return salario;
     }
 
+    public String getNomeDepartamento() {
+        return this.nomeDepartamento;
+    }
+
+    public void setNomeDepartamento(String nomeDepartamento) {
+        this.nomeDepartamento = nomeDepartamento;
+    }
+
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
@@ -96,13 +105,27 @@ public class Funcionario {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 
     @Override
     public String toString() {
-        return "ID: " + this.id + " ,Nome: " + this.nome + ", Cargo: " + this.cargo + ", CPF: " +
-                this.cpf + ", Salario: " + this.salario + ", Departamento: " + this.departamento;
+        return String.format("""
+        Funcionario [
+            ID: %d
+            Nome: %s
+            Telefone: %s
+            Email: %s
+            Data de Contratação: %s
+            Salário: R$ %.2f
+            Cargo: %s
+            CPF: %s
+            Departamento: %s
+        ]
+        """, id, nome, telefone, email,
+                data_contratacao != null ? data_contratacao.toString() : "Não Informada",
+                salario, cargo, cpf != null ? cpf : "Não Informado", nomeDepartamento != null ? nomeDepartamento : "Não Vinculado");
     }
+
 }
