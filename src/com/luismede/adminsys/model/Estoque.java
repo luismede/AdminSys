@@ -5,14 +5,18 @@ public class Estoque {
     private int quantidade_minima;
     private String localizacao;
     private Produto produto;
+    private String codigoBarras_produto;
+    private String nomeProduto;
 
     public Estoque() {}
 
-    public Estoque(int quantidade, int quantidade_minima, String localizacao, Produto produto) {
+    public Estoque(int quantidade, int quantidade_minima, String localizacao, Produto produto, String codigoBarras_produto, String nomeProduto) {
         this.quantidade = quantidade;
         this.quantidade_minima = quantidade_minima;
         this.localizacao = localizacao;
         this.produto = produto;
+        this.codigoBarras_produto = codigoBarras_produto;
+        this.nomeProduto = nomeProduto;
     }
 
     public int getQuantidade() {
@@ -47,9 +51,36 @@ public class Estoque {
         this.produto = produto;
     }
 
+    public String getCodigoBarras_produto() {
+        return codigoBarras_produto;
+    }
+
+    public void setCodigoBarras_produto(String codigoBarras_produto) {
+        this.codigoBarras_produto = codigoBarras_produto;
+    }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
     @Override
     public String toString() {
-        return "Quantidade: " + this.quantidade + ", Quantidade mínima: " + this.quantidade_minima + ", Localização: " +
-                this.localizacao + "Produto: " + this.produto;
+        return String.format("""
+        Estoque [
+            Quantidade Atual: %d
+            Quantidade Mínima: %d
+            Localização: %s
+            Produto: %s
+            Codigo de Barras: %s
+        ]
+        """, quantidade, quantidade_minima,
+                localizacao != null ? localizacao : "Não informada",
+                nomeProduto != null ? nomeProduto : "Não vinculado",
+                codigoBarras_produto != null ? codigoBarras_produto : "Não vinculado");
     }
+
 }

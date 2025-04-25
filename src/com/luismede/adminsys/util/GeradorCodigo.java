@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class GeradorCodigo {
     private static final String CODIGO_PAIS = "789"; // Código do Brasil
-    private final Random random = new Random();
+    private static final Random random = new Random();
 
-    public String gerarEAN13() {
+    public static String gerarEAN13() {
         // 9 dígitos aleatórios (total 12 com o prefixo)
 
         String base = CODIGO_PAIS + String.format("%09d", random.nextInt(1_000_000_000));

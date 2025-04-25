@@ -1,19 +1,19 @@
 package com.luismede.adminsys.service;
 
 import com.luismede.adminsys.model.Departamento;
-import com.luismede.adminsys.repository.DepartamentoRepository;
+import com.luismede.adminsys.dao.DepartamentoDAO;
 import com.luismede.adminsys.util.ValidadorUtil;
 
 import java.sql.Date;
 
 public class DepartamentoService {
-    private final DepartamentoRepository REPO;
+    private final DepartamentoDAO DAO;
 
     public DepartamentoService() {
-        this.REPO = new DepartamentoRepository();
+        this.DAO = new DepartamentoDAO();
     }
 
-    public void criarDepartamento(String nome, String descricao, double orcamento, Date data_criacao) {
+    public void saveDepartamento(String nome, String descricao, double orcamento, Date data_criacao) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do departamento é obrigatório");
         }
@@ -25,63 +25,71 @@ public class DepartamentoService {
         departamento.setData_criacao(data_criacao);
         departamento.setAtivo(1);
 
-        REPO.criarDepartamento(departamento);
+        DAO.save(departamento);
     }
 
-    public void alterarStatus(int id, int novoStatus) {
+    public void changeStatus(int id, int novoStatus) {
 
         // Validação do Novo status
         if (!ValidadorUtil.isStatusValido(novoStatus)) {
             throw new IllegalArgumentException("Status inválido, Use 0 (Inátivo) ou 1 (Ativo)");
         }
 
-        Departamento departamento = REPO.buscarPorId(id);
+        Departamento departamento = DAO.findById(id);
 
         if (departamento == null) {
             throw new IllegalArgumentException("Departamento não encontrado");
         }
 
         departamento.setAtivo(novoStatus);
-        REPO.atualizarStatus(departamento);
+        DAO.saveStatus(departamento);
 
 
     }
 
-    public void alterarOrcamento(int id, double novoOrcamento) {
-        Departamento departamento = REPO.buscarPorId(id);
+    public void updateOrcamento(int id, double novoOrcamento) {
+        Departamento departamento = DAO.findById(id);
 
         if (departamento == null) {
             throw new IllegalArgumentException("Departamento não encontrado");
         }
 
         departamento.setOrcamento(novoOrcamento);
-        REPO.atualizarOrcamento(departamento);
+        DAO.saveBudget(departamento);
     }
 
-    public void alterarNome(int id, String novoNome) {
-        Departamento departamento = REPO.buscarPorId(id);
+    public void updateNome(int id, String novoNome) {
+        Departamento departamento = DAO.findById(id);
 
         if (departamento == null) {
             throw new IllegalArgumentException("Departamento não encontrado");
         }
 
         departamento.setNome(novoNome);
-        REPO.atualizarNome(departamento);
+        DAO.saveName(departamento);
     }
 
-    public void verificarDepartamentoAtivo(int id) {
-        Departamento departamento = REPO.buscarPorId(id);
+    public void updateDescricao(int id, String novaDescricao) {
+        Departamento departamento = DAO.findById(id);
 
         if (departamento == null) {
             throw new IllegalArgumentException("Departamento não encontrado");
         }
 
-        if (ValidadorUtil.estaAtivo(departamento.getAtivo())) {
-            System.out.printf("O departamento %s está ATIVO", departamento.getNome());
-        } else {
-            System.out.printf("O departamento %s está INATIVO", departamento.getNome());
+        departamento.setDescricao(novaDescricao);
+        DAO.saveDescription(departamento);
+    }
 
+    public boolean isDepartamentoAtivo(int id) {
+        Departamento departamento = DAO.findById(id);
+
+        if (departamento == null) {
+            throw new IllegalArgumentException("Departamento não encontrado...");
         }
+
+        if (ValidadorUtil.estaAtivo(departamento.getAtivo())) {
+            return true;
+        } return false;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.luismede.adminsys.repository;
+package com.luismede.adminsys.dao;
 
 import com.luismede.adminsys.model.Departamento;
 import com.luismede.adminsys.util.ValidadorUtil;
@@ -7,13 +7,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepartamentoRepository {
+public class DepartamentoDAO {
 
-    public void criarDepartamento(Departamento departamento) {
+    public void save(Departamento departamento) {
         final String SQL = "INSERT INTO departamento (nome, descricao, orcamento, data_criacao, ativo) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement stmt = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, departamento.getNome());
             stmt.setString(2, departamento.getDescricao());
@@ -32,15 +32,15 @@ public class DepartamentoRepository {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao criarDepartamento o departamento no Banco de dados", e);
+            throw new RuntimeException("Erro ao save o departamento no Banco de dados", e);
         }
     }
 
-    public List<Departamento> buscarTodos() throws SQLException {
+    public List<Departamento> findAll() throws SQLException {
         final String SQL = "SELECT * FROM departamento";
         List<Departamento> departamentos = new ArrayList<>();
 
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement stmt = connection.prepareStatement(SQL);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -59,10 +59,10 @@ public class DepartamentoRepository {
 
     }
 
-    public Departamento buscarPorId(int id) {
+    public Departamento findById(int id) {
         final String SQL = "SELECT * FROM departamento WHERE id = ?";
 
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement stmt = connection.prepareStatement(SQL)) {
 
             stmt.setInt(1, id);
@@ -80,16 +80,32 @@ public class DepartamentoRepository {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscarTodos por ID", e);
+            throw new RuntimeException("Erro ao buscar por ID", e);
         }
         return null;
     }
 
-    public List<Departamento> buscarPorStatus(int status) throws SQLException {
+    public int deleteById(int id) {
+        final String SQL = "DELETE FROM departamento WHERE id = ?";
+
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(SQL)) {
+
+            stmt.setInt(1, id);
+
+            return stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Departamento> findByStatus(int status) throws SQLException {
         final String SQL = "SELECT * FROM departamento WHERE ativo = ?";
         List<Departamento> departamentos = new ArrayList<>();
 
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement stmt = connection.prepareStatement(SQL)
         ) {
 
@@ -111,27 +127,27 @@ public class DepartamentoRepository {
         return departamentos;
     }
 
-    public void atualizarStatus(Departamento departamento) {
+    public void saveStatus(Departamento departamento) {
         final String SQL = "UPDATE departamento SET ativo = ? WHERE id = ?";
 
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement stmt = connection.prepareStatement(SQL)) {
             stmt.setInt(1, departamento.getAtivo());
-            stmt.setInt(2, departamento.getId());
+            stmt.setLong(2, departamento.getId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao atualizarStatus o ID", e);
+            throw new RuntimeException("Erro ao saveStatus o ID", e);
         }
     }
 
-    public void atualizarOrcamento(Departamento departamento) {
+    public void saveBudget(Departamento departamento) {
         final String SQL = "UPDATE departamento SET orcamento = ? WHERE id = ?";
 
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement stmt = connection.prepareStatement(SQL)) {
             stmt.setDouble(1, departamento.getOrcamento());
-            stmt.setInt(2, departamento.getId());
+            stmt.setLong(2, departamento.getId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -139,17 +155,36 @@ public class DepartamentoRepository {
         }
     }
 
-    public void atualizarNome(Departamento departamento) {
+    public void saveName(Departamento departamento) {
         final String SQL = "UPDATE departamento SET nome = ? WHERE id = ?";
 
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement stmt = connection.prepareStatement(SQL)) {
             stmt.setString(1, departamento.getNome());
-            stmt.setInt(2, departamento.getId());
+            stmt.setLong(2, departamento.getId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar o nome", e);
         }
     }
+
+    public void saveDescription(Departamento departamento) {
+        final String SQL = "UPDATE departamento SET descricao = ? WHERE id = ?";
+
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(SQL)) {
+            stmt.setString(1, departamento.getDescricao());
+            stmt.setLong(2, departamento.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar a descrição", e);
+        }
+    }
+
+
+
+
+
 }
