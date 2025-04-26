@@ -1,10 +1,10 @@
-package com.luismede.adminsys.repository;
+package com.luismede.adminsys.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionDB {
+public class ConnectionFactory {
     // Definição das informações de conexão do DB, utilizando o arquivo .env
     private static final String HOST = System.getenv("DB_URL");
     private static final String USER = System.getenv("DB_USER");
@@ -12,7 +12,7 @@ public class ConnectionDB {
 
     protected Connection connection;
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         try {
             // Driver que srá utilizado pelo Driver Manager
             Class.forName("org.postgresql.Driver");
