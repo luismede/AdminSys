@@ -1,22 +1,43 @@
 package com.luismede.adminsys.model;
 
+import java.sql.Date;
+
 public class Estoque {
+    private long produto_id;
     private int quantidade;
     private int quantidade_minima;
     private String localizacao;
     private Produto produto;
     private String codigoBarras_produto;
     private String nomeProduto;
+    private Date movimentacao_estoque;
 
     public Estoque() {}
 
-    public Estoque(int quantidade, int quantidade_minima, String localizacao, Produto produto, String codigoBarras_produto, String nomeProduto) {
+    public Estoque(int quantidade, int quantidade_minima, String localizacao, Produto produto, String codigoBarras_produto, String nomeProduto, Date movimentacao_estoque) {
         this.quantidade = quantidade;
         this.quantidade_minima = quantidade_minima;
         this.localizacao = localizacao;
         this.produto = produto;
         this.codigoBarras_produto = codigoBarras_produto;
         this.nomeProduto = nomeProduto;
+        this.movimentacao_estoque = movimentacao_estoque;
+    }
+
+    public long getProduto_id() {
+        return produto_id;
+    }
+
+    public void setProduto_id(long id) {
+        this.produto_id = id;
+    }
+
+    public Date getMovimentacao_estoque() {
+        return movimentacao_estoque;
+    }
+
+    public void setMovimentacao_estoque(Date movimentacao_estoque) {
+        this.movimentacao_estoque = movimentacao_estoque;
     }
 
     public int getQuantidade() {
@@ -76,11 +97,13 @@ public class Estoque {
             Localização: %s
             Produto: %s
             Codigo de Barras: %s
+            Movimentação do Estoque: %s
         ]
         """, quantidade, quantidade_minima,
                 localizacao != null ? localizacao : "Não informada",
                 nomeProduto != null ? nomeProduto : "Não vinculado",
-                codigoBarras_produto != null ? codigoBarras_produto : "Não vinculado");
+                codigoBarras_produto != null ? codigoBarras_produto : "Não vinculado",
+                movimentacao_estoque.toString());
     }
 
 }
