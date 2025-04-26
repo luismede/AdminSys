@@ -1,12 +1,7 @@
 package com.luismede.adminsys.service;
 
-import com.luismede.adminsys.dao.DepartamentoDAO;
 import com.luismede.adminsys.dao.ProdutoDAO;
-import com.luismede.adminsys.model.Departamento;
 import com.luismede.adminsys.model.Produto;
-import com.luismede.adminsys.util.ValidadorUtil;
-
-import java.sql.Date;
 
 public class ProdutoService {
     private final ProdutoDAO DAO;
@@ -15,7 +10,7 @@ public class ProdutoService {
         this.DAO = new ProdutoDAO();
     }
 
-    public void saveDepartamento(String nome, String descricao, String codigo_barras, double preco_custo, double preco_venda, String categoria) {
+    public void saveProduto(String nome, String descricao, String codigo_barras, double preco_custo, double preco_venda, String categoria) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do produto é obrigatório");
         }
