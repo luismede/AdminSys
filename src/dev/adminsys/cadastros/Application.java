@@ -1,13 +1,4 @@
-package com.luismede.adminsys;
-
-import com.luismede.adminsys.dao.DepartamentoDAO;
-import com.luismede.adminsys.dao.EstoqueDAO;
-import com.luismede.adminsys.dao.FuncionarioDAO;
-import com.luismede.adminsys.dao.ProdutoDAO;
-import com.luismede.adminsys.model.Estoque;
-import com.luismede.adminsys.model.Produto;
-import com.luismede.adminsys.service.EstoqueService;
-import com.luismede.adminsys.service.ProdutoService;
+package dev.adminsys.cadastros;
 
 import java.sql.SQLException;
 

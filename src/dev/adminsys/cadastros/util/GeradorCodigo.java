@@ -1,4 +1,4 @@
-package com.luismede.adminsys.util;
+package dev.adminsys.cadastros.util;
 
 import java.util.Random;
 

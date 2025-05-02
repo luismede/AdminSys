@@ -1,4 +1,4 @@
-package com.luismede.adminsys.model;
+package dev.adminsys.cadastros.model;
 
 public class Produto {
     private Long id;

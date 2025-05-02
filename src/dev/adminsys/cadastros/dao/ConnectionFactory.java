@@ -1,4 +1,4 @@
-package com.luismede.adminsys.dao;
+package dev.adminsys.cadastros.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,8 +1,8 @@
-package com.luismede.adminsys.service;
+package dev.adminsys.cadastros.service;
 
-import com.luismede.adminsys.model.Departamento;
-import com.luismede.adminsys.model.Funcionario;
-import com.luismede.adminsys.dao.FuncionarioDAO;
+import dev.adminsys.cadastros.model.Departamento;
+import dev.adminsys.cadastros.model.Funcionario;
+import dev.adminsys.cadastros.dao.FuncionarioDAO;
 
 import java.sql.Date;
 

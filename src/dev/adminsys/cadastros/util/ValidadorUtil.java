@@ -1,4 +1,4 @@
-package com.luismede.adminsys.util;
+package dev.adminsys.cadastros.util;
 
 public class ValidadorUtil {
     private static final int ATIVO = 1;

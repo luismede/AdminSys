@@ -1,6 +1,6 @@
-package com.luismede.adminsys.test;
+package dev.adminsys.cadastros.test;
 
-import com.luismede.adminsys.util.ValidadorUtil;
+import dev.adminsys.cadastros.util.ValidadorUtil;
 
 public class ValidadorTest {
     public static void main(String[] args) {

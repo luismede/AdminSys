@@ -1,8 +1,8 @@
-package com.luismede.adminsys.service;
+package dev.adminsys.cadastros.service;
 
-import com.luismede.adminsys.dao.EstoqueDAO;
-import com.luismede.adminsys.model.Estoque;
-import com.luismede.adminsys.model.Produto;
+import dev.adminsys.cadastros.dao.EstoqueDAO;
+import dev.adminsys.cadastros.model.Estoque;
+import dev.adminsys.cadastros.model.Produto;
 
 
 public class EstoqueService {

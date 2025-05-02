@@ -1,6 +1,6 @@
-package com.luismede.adminsys.dao;
+package dev.adminsys.cadastros.dao;
 
-import com.luismede.adminsys.model.Funcionario;
+import dev.adminsys.cadastros.model.Funcionario;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-package com.luismede.adminsys.service;
+package dev.adminsys.cadastros.service;
 
-import com.luismede.adminsys.dao.ProdutoDAO;
-import com.luismede.adminsys.model.Produto;
+import dev.adminsys.cadastros.dao.ProdutoDAO;
+import dev.adminsys.cadastros.model.Produto;
 
 public class ProdutoService {
     // Injeção de Dependencia
