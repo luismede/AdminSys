@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EstoqueDAO {
+    // Query para criação do estoque
     public void save(Estoque estoque) {
         final String SQL = "INSERT INTO estoque (quantidade, quantidade_minima, localizacao, produto_id) VALUES (?, ?, ?, ?)";
 
@@ -30,6 +31,7 @@ public class EstoqueDAO {
         }
     }
 
+    // Query para buscar todos os produtos em estoque
     public List<Estoque> findAll() throws SQLException {
         final String SQL = "select e.produto_id, p.nome as nome_produto, p.codigo_barras as codigo_barras, e.quantidade, e.quantidade_minima, e.localizacao e.movimentacao_estoque" +
                 "from estoque e join produto p on e.produto_id = p.id;";
@@ -57,6 +59,7 @@ public class EstoqueDAO {
 
     }
 
+    // Query para buscar o produto no estoque pelo seu id
     public Estoque findByProdutoId(int produtoId) {
         final String SQL = "select e.produto_id, p.nome as nome_produto, p.codigo_barras as codigo_barras, e.quantidade, e.quantidade_minima, e.localizacao, e.movimentacao_estoque\n" +
                 "from estoque e join produto p on e.produto_id = p.id where e.produto_id = ?";
@@ -86,6 +89,7 @@ public class EstoqueDAO {
         return null;
     }
 
+    // Query para deletar produto em estoque pelo id
     public int deleteById(int id) {
         final String SQL = "DELETE FROM estoque WHERE produto_id = ?";
 
@@ -102,6 +106,7 @@ public class EstoqueDAO {
         return 0;
     }
 
+    // Query para atualizar a quantidade em estoque
     public void saveQuantity(Estoque estoque) {
         final String SQL = "UPDATE estoque SET quantidade = ?, movimentacao_estoque = current_date WHERE produto_id = ?";
 
@@ -117,6 +122,7 @@ public class EstoqueDAO {
         }
     }
 
+    // Query para atualizar a quantide minima do produto no Estoque
     public void saveQuantityMin(Estoque estoque) {
         final String SQL = "UPDATE estoque SET quantidade_minima = ?, movimentacao_estoque = current_date WHERE produto_id = ?";
 
@@ -132,6 +138,7 @@ public class EstoqueDAO {
         }
     }
 
+    // Query para atualizar a localização do estoque
     public void saveLocalization(Estoque estoque) {
         final String SQL = "UPDATE estoque SET localizacao = ?, movimentacao_estoque = current_date WHERE produto_id = ?";
 

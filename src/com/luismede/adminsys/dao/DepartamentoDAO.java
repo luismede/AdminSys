@@ -7,8 +7,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO para operações CRUD com o modelo Departamento.
+ */
+
 public class DepartamentoDAO {
 
+    /**
+     * Insere um novo departamento no banco de dados.
+     *
+     * @param departamento Objeto Departamento a ser persistido
+     * @throws SQLException Se ocorrer erro de SQL
+     */
+
+    // Query para criação de departamento
     public void save(Departamento departamento) {
         final String SQL = "INSERT INTO departamento (nome, descricao, orcamento, data_criacao, ativo) " +
                 "VALUES (?, ?, ?, ?, ?)";
@@ -19,13 +31,14 @@ public class DepartamentoDAO {
             stmt.setString(2, departamento.getDescricao());
             stmt.setDouble(3, departamento.getOrcamento());
             stmt.setDate(4, departamento.getData_criacao());
+            // Utilização da classe ValidadorUtil para validação
             stmt.setBoolean(5, ValidadorUtil.isAtivo(departamento.getAtivo()));
 
             stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    departamento.setId(rs.getInt(1));
+                    departamento.setId(rs.getLong(1));
                 } else {
                     throw new SQLException("Falha ao obter o ID gerado, nenhum ID obtido.");
                 }
@@ -36,6 +49,7 @@ public class DepartamentoDAO {
         }
     }
 
+    // Query para buscar todos os departamentos
     public List<Departamento> findAll() throws SQLException {
         final String SQL = "SELECT * FROM departamento";
         List<Departamento> departamentos = new ArrayList<>();
@@ -46,7 +60,7 @@ public class DepartamentoDAO {
 
             while (rs.next()) {
                 Departamento departamento = new Departamento();
-                departamento.setId(rs.getInt("id"));
+                departamento.setId(rs.getLong("id"));
                 departamento.setNome(rs.getString("nome"));
                 departamento.setDescricao(rs.getString("descricao"));
                 departamento.setOrcamento(rs.getDouble("orcamento"));
@@ -59,6 +73,7 @@ public class DepartamentoDAO {
 
     }
 
+    // Query para buscar o departamento pelo Id
     public Departamento findById(int id) {
         final String SQL = "SELECT * FROM departamento WHERE id = ?";
 
@@ -70,7 +85,7 @@ public class DepartamentoDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Departamento departamento = new Departamento();
-                    departamento.setId(rs.getInt("id"));
+                    departamento.setId(rs.getLong("id"));
                     departamento.setNome(rs.getString("nome"));
                     departamento.setDescricao(rs.getString("descricao"));
                     departamento.setOrcamento(rs.getDouble("orcamento"));
@@ -85,6 +100,7 @@ public class DepartamentoDAO {
         return null;
     }
 
+    // Query para deletar departamento pelo seu Id
     public int deleteById(int id) {
         final String SQL = "DELETE FROM departamento WHERE id = ?";
 
@@ -101,6 +117,7 @@ public class DepartamentoDAO {
         return 0;
     }
 
+    // Query para buscar departamentos ativos/inativos
     public List<Departamento> findByStatus(int status) throws SQLException {
         final String SQL = "SELECT * FROM departamento WHERE ativo = ?";
         List<Departamento> departamentos = new ArrayList<>();
@@ -114,7 +131,7 @@ public class DepartamentoDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Departamento departamento = new Departamento();
-                    departamento.setId(rs.getInt("id"));
+                    departamento.setId(rs.getLong("id"));
                     departamento.setNome(rs.getString("nome"));
                     departamento.setDescricao(rs.getString("descricao"));
                     departamento.setOrcamento(rs.getDouble("orcamento"));
@@ -127,6 +144,7 @@ public class DepartamentoDAO {
         return departamentos;
     }
 
+    // Query para atualizar o status do departamento
     public void saveStatus(Departamento departamento) {
         final String SQL = "UPDATE departamento SET ativo = ? WHERE id = ?";
 
@@ -141,6 +159,7 @@ public class DepartamentoDAO {
         }
     }
 
+    // Query para atualizar o orcamento do departamento
     public void saveBudget(Departamento departamento) {
         final String SQL = "UPDATE departamento SET orcamento = ? WHERE id = ?";
 
@@ -155,6 +174,7 @@ public class DepartamentoDAO {
         }
     }
 
+    // Query para atualizar o nome do departamento
     public void saveName(Departamento departamento) {
         final String SQL = "UPDATE departamento SET nome = ? WHERE id = ?";
 
@@ -169,6 +189,7 @@ public class DepartamentoDAO {
         }
     }
 
+    // Query para atualizar a descrição do departamento
     public void saveDescription(Departamento departamento) {
         final String SQL = "UPDATE departamento SET descricao = ? WHERE id = ?";
 

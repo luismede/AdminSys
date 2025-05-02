@@ -8,8 +8,8 @@ import java.sql.Date;
 
 public class FuncionarioService {
     private static FuncionarioDAO DAO = new FuncionarioDAO();
-    private static Departamento departamento = new Departamento();
 
+    // Injeção de Depedendencia
     public FuncionarioService() {
         this.DAO = new FuncionarioDAO();
     }
@@ -35,7 +35,7 @@ public class FuncionarioService {
         DAO.save(funcionario);
     }
 
-    public void updateSalario(int id, double novoSalario) {
+    public void updateSalario(Long id, double novoSalario) {
         Funcionario funcionario = DAO.findById(id);
 
         if (funcionario == null) {
@@ -46,7 +46,7 @@ public class FuncionarioService {
         DAO.saveSalary(funcionario);
     }
 
-    public void updateEmail(int id, String novoEmail) {
+    public void updateEmail(Long id, String novoEmail) {
         Funcionario funcionario = DAO.findById(id);
 
         if (funcionario == null) {
@@ -57,7 +57,7 @@ public class FuncionarioService {
         DAO.saveEmail(funcionario);
     }
 
-    public void updateTelefone(int id, String novoTelefone) {
+    public void updateTelefone(Long id, String novoTelefone) {
         Funcionario funcionario = DAO.findById(id);
 
         if (funcionario == null) {
@@ -68,7 +68,7 @@ public class FuncionarioService {
         DAO.saveTelephone(funcionario);
     }
 
-    public void updateCargo(int id, String novoCargo) {
+    public void updateCargo(Long id, String novoCargo) {
         Funcionario funcionario = DAO.findById(id);
 
         if (funcionario == null) {

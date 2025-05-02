@@ -3,7 +3,7 @@ package com.luismede.adminsys.model;
 import java.sql.Date;
 
 public class Estoque {
-    private long produto_id;
+    private Long produto_id;
     private int quantidade;
     private int quantidade_minima;
     private String localizacao;
@@ -12,9 +12,12 @@ public class Estoque {
     private String nomeProduto;
     private Date movimentacao_estoque;
 
+    // NoArgsConstructor
     public Estoque() {}
 
-    public Estoque(int quantidade, int quantidade_minima, String localizacao, Produto produto, String codigoBarras_produto, String nomeProduto, Date movimentacao_estoque) {
+    // AllArgsConstructor
+    public Estoque(Long produto_id, int quantidade, int quantidade_minima, String localizacao, Produto produto, String codigoBarras_produto, String nomeProduto, Date movimentacao_estoque) {
+        this.produto_id = produto_id;
         this.quantidade = quantidade;
         this.quantidade_minima = quantidade_minima;
         this.localizacao = localizacao;
@@ -24,20 +27,12 @@ public class Estoque {
         this.movimentacao_estoque = movimentacao_estoque;
     }
 
-    public long getProduto_id() {
+    public Long getProduto_id() {
         return produto_id;
     }
 
-    public void setProduto_id(long id) {
-        this.produto_id = id;
-    }
-
-    public Date getMovimentacao_estoque() {
-        return movimentacao_estoque;
-    }
-
-    public void setMovimentacao_estoque(Date movimentacao_estoque) {
-        this.movimentacao_estoque = movimentacao_estoque;
+    public void setProduto_id(Long produto_id) {
+        this.produto_id = produto_id;
     }
 
     public int getQuantidade() {
@@ -86,6 +81,14 @@ public class Estoque {
 
     public void setNomeProduto(String nomeProduto) {
         this.nomeProduto = nomeProduto;
+    }
+
+    public Date getMovimentacao_estoque() {
+        return movimentacao_estoque;
+    }
+
+    public void setMovimentacao_estoque(Date movimentacao_estoque) {
+        this.movimentacao_estoque = movimentacao_estoque;
     }
 
     @Override

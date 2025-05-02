@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FuncionarioDAO {
+    // Query para criação do funcionario na tabela
     public void save(Funcionario funcionario) {
         String sql = "INSERT INTO funcionario (nome, telefone, email, data_contratacao, salario, cargo, cpf, dept_id) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -31,7 +32,7 @@ public class FuncionarioDAO {
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    funcionario.setId(rs.getInt(1));
+                    funcionario.setId(rs.getLong(1));
                 }
             }
 
@@ -40,6 +41,7 @@ public class FuncionarioDAO {
         }
     }
 
+    // Query para buscar por todos os funcionarios
     public List<Funcionario> findAll() throws SQLException {
         final String SQL = "SELECT f.id, f.nome AS nome_funcionario, f.telefone, f.email, f.data_contratacao, f.salario, f.cargo, f.cpf, d.nome AS nome_departamento FROM funcionario f JOIN departamento d ON f.dept_id=d.id";
         List<Funcionario> funcionarios = new ArrayList<>();
@@ -51,7 +53,7 @@ public class FuncionarioDAO {
             while (rs.next()) {
                 Funcionario funcionario = new Funcionario();
 
-                funcionario.setId(rs.getInt("id"));
+                funcionario.setId(rs.getLong("id"));
                 funcionario.setNome(rs.getString("nome_funcionario"));
                 funcionario.setTelefone(rs.getString("telefone"));
                 funcionario.setEmail(rs.getString("email"));
@@ -71,20 +73,21 @@ public class FuncionarioDAO {
 
     }
 
-    public Funcionario findById(int id) {
+    // Query para buscar o funcionario pelo seu id
+    public Funcionario findById(Long id) {
         final String SQL = "SELECT f.id, f.nome AS nome_funcionario, f.telefone, f.email, f.data_contratacao, f.salario, f.cargo, f.cpf, d.nome " +
                 "AS nome_departamento FROM funcionario f JOIN departamento d ON f.dept_id=d.id WHERE f.id = ?";
 
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement stmt = connection.prepareStatement(SQL)) {
 
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Funcionario funcionario = new Funcionario();
 
-                    funcionario.setId(rs.getInt("id"));
+                    funcionario.setId(rs.getLong("id"));
 
                     funcionario.setNome(rs.getString("nome_funcionario"));
                     funcionario.setTelefone(rs.getString("telefone"));
@@ -105,6 +108,7 @@ public class FuncionarioDAO {
         return null;
     }
 
+    // Query para deletar o funcionario da tabela pelo seu id
     public int deleteById(int id) {
         final String SQL = "DELETE FROM funcionario WHERE id = ?";
 
@@ -116,11 +120,14 @@ public class FuncionarioDAO {
             return stmt.executeUpdate();
 
         } catch (SQLException e) {
+            // É o mesmo que dizer: “exceção, se imprime aí!”. Ele vai imprimir não só a mensagem de erro, mas
+            // toda a pilha de chamadas (Stack) até ali.
             e.printStackTrace();
         }
         return 0;
     }
 
+    // Query para atualizar o salario do funcionario
     public void saveSalary(Funcionario funcionario) {
         final String SQL = "UPDATE funcionario SET salario = ? WHERE id = ?";
 
@@ -135,6 +142,7 @@ public class FuncionarioDAO {
         }
     }
 
+    // Query para atualizar o e-mail do funcionario cadastrado
     public void saveEmail(Funcionario funcionario) {
         final String SQL = "UPDATE funcionario SET email = ? WHERE id = ?";
 
@@ -149,6 +157,7 @@ public class FuncionarioDAO {
         }
     }
 
+    // Query para atualizar o telefone do funcionario cadastrado
     public void saveTelephone(Funcionario funcionario) {
         final String SQL = "UPDATE funcionario SET telefone = ? WHERE id = ?";
 
@@ -163,6 +172,7 @@ public class FuncionarioDAO {
         }
     }
 
+    // Query para atualizar o cargo do funcionario
     public void saveRole(Funcionario funcionario) {
         final String SQL = "UPDATE funcionario SET cargo = ? WHERE id = ?";
 

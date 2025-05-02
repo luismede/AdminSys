@@ -4,6 +4,7 @@ import com.luismede.adminsys.dao.ProdutoDAO;
 import com.luismede.adminsys.model.Produto;
 
 public class ProdutoService {
+    // Injeção de Dependencia
     private final ProdutoDAO DAO;
 
     public ProdutoService() {

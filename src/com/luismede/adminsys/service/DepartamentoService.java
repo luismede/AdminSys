@@ -7,13 +7,15 @@ import com.luismede.adminsys.util.ValidadorUtil;
 import java.sql.Date;
 
 public class DepartamentoService {
+    // Injeção de dependencia
     private final DepartamentoDAO DAO;
 
     public DepartamentoService() {
         this.DAO = new DepartamentoDAO();
     }
 
-    public void saveDepartamento(String nome, String descricao, double orcamento, Date data_criacao) {
+   // Criar Departamento
+    public void save(String nome, String descricao, double orcamento, Date data_criacao) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do departamento é obrigatório");
         }
@@ -28,6 +30,7 @@ public class DepartamentoService {
         DAO.save(departamento);
     }
 
+    // Alterar status do departamento
     public void changeStatus(int id, int novoStatus) {
 
         // Validação do Novo status
@@ -47,6 +50,7 @@ public class DepartamentoService {
 
     }
 
+    // Alterar orçamento
     public void updateOrcamento(int id, double novoOrcamento) {
         Departamento departamento = DAO.findById(id);
 
@@ -58,6 +62,7 @@ public class DepartamentoService {
         DAO.saveBudget(departamento);
     }
 
+    // Alterar nome do Departamento
     public void updateNome(int id, String novoNome) {
         Departamento departamento = DAO.findById(id);
 
@@ -69,6 +74,7 @@ public class DepartamentoService {
         DAO.saveName(departamento);
     }
 
+    // Alterar descrição do departamento
     public void updateDescricao(int id, String novaDescricao) {
         Departamento departamento = DAO.findById(id);
 
@@ -80,6 +86,7 @@ public class DepartamentoService {
         DAO.saveDescription(departamento);
     }
 
+    // Departamento ativo
     public boolean isDepartamentoAtivo(int id) {
         Departamento departamento = DAO.findById(id);
 

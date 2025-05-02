@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoDAO {
+        // Query para registro do produto na tabela
         public void save(Produto produto) {
             final String SQL = "INSERT INTO produto (nome, descricao, codigo_barras, preco_custo, preco_venda, categoria) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
@@ -24,7 +25,7 @@ public class ProdutoDAO {
 
                 try (ResultSet rs = stmt.getGeneratedKeys()) {
                     if (rs.next()) {
-                        produto.setId(rs.getInt(1));
+                        produto.setId(rs.getLong(1));
                     } else {
                         throw new SQLException("Falha ao obter o ID gerado, nenhum ID obtido.");
                     }
@@ -35,6 +36,7 @@ public class ProdutoDAO {
             }
         }
 
+        // Query para buscar por todos os produtos na tabela
         public List<Produto> findAll() throws SQLException {
             final String SQL = "SELECT * FROM produto";
             List<Produto> produtos = new ArrayList<>();
@@ -45,7 +47,7 @@ public class ProdutoDAO {
 
                 while (rs.next()) {
                     Produto produto = new Produto();
-                    produto.setId(rs.getInt("id"));
+                    produto.setId(rs.getLong("id"));
                     produto.setNome(rs.getString("nome"));
                     produto.setDescricao(rs.getString("descricao"));
                     produto.setCodigo_barras(rs.getString("codigo_barras"));
@@ -60,6 +62,7 @@ public class ProdutoDAO {
 
         }
 
+        // Query para buscar o produto pelo id
         public Produto findById(int id) {
             final String SQL = "SELECT * FROM produto WHERE id = ?";
 
@@ -72,7 +75,7 @@ public class ProdutoDAO {
                     if (rs.next()) {
                         Produto produto = new Produto();
 
-                        produto.setId(rs.getInt("id"));
+                        produto.setId(rs.getLong("id"));
                         produto.setNome(rs.getString("nome"));
                         produto.setDescricao(rs.getString("descricao"));
                         produto.setCodigo_barras(rs.getString("codigo_barras"));
@@ -89,6 +92,7 @@ public class ProdutoDAO {
             return null;
         }
 
+        // Query para deletar um produto pelo seu id
         public int deleteById(int id) {
             final String SQL = "DELETE FROM produto WHERE id = ?";
 
@@ -105,6 +109,7 @@ public class ProdutoDAO {
             return 0;
         }
 
+        // Query para buscar o produto pelo seu status
         public List<Produto> findByStatus(int status) throws SQLException {
             final String SQL = "SELECT * FROM produto WHERE ativo = ?";
             List<Produto> produtos = new ArrayList<>();
@@ -119,7 +124,7 @@ public class ProdutoDAO {
                     while (rs.next()) {
                         Produto produto = new Produto();
 
-                        produto.setId(rs.getInt("id"));
+                        produto.setId(rs.getLong("id"));
                         produto.setNome(rs.getString("nome"));
                         produto.setDescricao(rs.getString("descricao"));
                         produto.setCodigo_barras(rs.getString("codigo_barras"));
@@ -134,6 +139,7 @@ public class ProdutoDAO {
             return produtos;
         }
 
+        // Query para atualizar o preço de custo do produto
         public void savePriceCost(Produto produto) {
             final String SQL = "UPDATE produto SET preco_custo = ? WHERE id = ?";
 
@@ -148,6 +154,7 @@ public class ProdutoDAO {
             }
         }
 
+        // Query para atualizar o preço de venda do produto
         public void savePriceSale(Produto produto) {
             final String SQL = "UPDATE produto SET preco_venda = ? WHERE id = ?";
 
@@ -162,6 +169,7 @@ public class ProdutoDAO {
             }
         }
 
+        // Query para atualizar o nome do produto
         public void saveName(Produto produto) {
             final String SQL = "UPDATE produto SET nome = ? WHERE id = ?";
 
@@ -176,6 +184,7 @@ public class ProdutoDAO {
             }
         }
 
+        // Query para atualizar a descrição do produto
         public void saveDescription(Produto produto) {
             final String SQL = "UPDATE produto SET descricao = ? WHERE id = ?";
 

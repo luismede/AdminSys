@@ -1,7 +1,7 @@
 package com.luismede.adminsys.model;
 
 public class Produto {
-    private long id;
+    private Long id;
     private String nome;
     private String descricao;
     private String codigo_barras;
@@ -9,14 +9,13 @@ public class Produto {
     private double preco_venda;
     private String categoria;
 
+    // NoArgsConstructor
     public Produto() {
     }
 
-    public Produto(String codigo_barras) {
-        this.codigo_barras = codigo_barras;
-    }
-
-    public Produto(long id, String nome, String descricao, String codigo_barras, double preco_custo, double preco_venda, String categoria) {
+    // AllArgsConstructor
+    public Produto(Long id, String nome, String descricao, String codigo_barras, double preco_custo, double preco_venda, String categoria) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.codigo_barras = codigo_barras;
@@ -25,24 +24,13 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public void setCodigo_barras(String codigo_barras) {
-        this.codigo_barras = codigo_barras;
-    }
 
-    public void setPreco_custo(double preco_custo) {
-        this.preco_custo = preco_custo;
-    }
-
-    public void setPreco_venda(double preco_venda) {
-        this.preco_venda = preco_venda;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -65,14 +53,24 @@ public class Produto {
         return codigo_barras;
     }
 
+    public void setCodigo_barras(String codigo_barras) {
+        this.codigo_barras = codigo_barras;
+    }
 
     public double getPreco_custo() {
         return preco_custo;
     }
 
+    public void setPreco_custo(double preco_custo) {
+        this.preco_custo = preco_custo;
+    }
 
     public double getPreco_venda() {
         return preco_venda;
+    }
+
+    public void setPreco_venda(double preco_venda) {
+        this.preco_venda = preco_venda;
     }
 
     public String getCategoria() {

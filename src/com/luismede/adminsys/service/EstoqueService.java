@@ -6,6 +6,7 @@ import com.luismede.adminsys.model.Produto;
 
 
 public class EstoqueService {
+    // Injeção de Dependencia
     private final EstoqueDAO DAO;
 
     public EstoqueService() {

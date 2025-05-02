@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+/**
+ * Classe responsável por criar conexões com o banco de dados.
+ */
+
 public class ConnectionFactory {
     // Definição das informações de conexão do DB, utilizando o arquivo .env
     private static final String HOST = System.getenv("DB_URL");

@@ -3,7 +3,7 @@ package com.luismede.adminsys.model;
 import java.sql.Date;
 
 public class Funcionario {
-    private long id;
+    private Long id;
     private String nome;
     private String telefone;
     private String email;
@@ -14,10 +14,14 @@ public class Funcionario {
     private String nomeDepartamento;
     private Departamento departamento;
 
-    public Funcionario() {
-    }
+    // NoArgsConstructor
+    public Funcionario() {}
 
-    public Funcionario(String nome, String telefone, String email, Date data_contratacao, double salario, String cargo, String cpf, Departamento departamento) {
+    // AllArgsConstructor
+
+
+    public Funcionario(Long id, String nome, String telefone, String email, Date data_contratacao, double salario, String cargo, String cpf, String nomeDepartamento, Departamento departamento) {
+        this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -25,7 +29,16 @@ public class Funcionario {
         this.salario = salario;
         this.cargo = cargo;
         this.cpf = cpf;
+        this.nomeDepartamento = nomeDepartamento;
         this.departamento = departamento;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -60,6 +73,14 @@ public class Funcionario {
         this.data_contratacao = data_contratacao;
     }
 
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
     public String getCargo() {
         return cargo;
     }
@@ -76,37 +97,20 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
-    }
-
-    public double getSalario() {
-        return salario;
-    }
-
     public String getNomeDepartamento() {
-        return this.nomeDepartamento;
+        return nomeDepartamento;
     }
 
     public void setNomeDepartamento(String nomeDepartamento) {
         this.nomeDepartamento = nomeDepartamento;
     }
 
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public long getId() {
-        return this.id;
     }
 
     @Override
